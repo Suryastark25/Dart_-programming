@@ -1,0 +1,37 @@
+void main() {
+  // Test cases
+  print(numberToWords(0));     // zero
+  print(numberToWords(7));     // seven
+  print(numberToWords(15));    // fifteen
+  print(numberToWords(42));    // forty-two
+  print(numberToWords(99));    // ninety-nine
+}
+
+String numberToWords(int number) {
+  if (number < 0 || number > 99) {
+    return "Number out of range (0-99)";
+  }
+
+  if (number == 0) {
+    return "zero";
+  }
+
+  // Arrays to hold words for numbers 1-19 and tens multiples
+  List<String> ones = [
+    "", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+    "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
+    "seventeen", "eighteen", "nineteen"
+  ];
+
+  List<String> tens = [
+    "", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"
+  ];
+
+  if (number < 20) {
+    return ones[number];
+  } else {
+    int tensDigit = number ~/ 10;
+    int onesDigit = number % 10;
+    return "${tens[tensDigit]}${onesDigit != 0 ? '-' + ones[onesDigit] : ''}";
+  }
+}
